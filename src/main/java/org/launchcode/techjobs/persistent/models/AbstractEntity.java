@@ -3,31 +3,42 @@ package org.launchcode.techjobs.persistent.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@MappedSuperclass
+@MappedSuperclass // parent class tables from subclass inherit AbstractEntitiy
 public abstract class AbstractEntity {
 
-    @Id
+    @Id// adding id and generated value as subclasses are entities themselves
     @GeneratedValue
     private int id;
 
+// Annotations for no blank field and limitation of size of name string
+    @NotNull
+    @NotBlank(message="Enter name")
+    @Size(min=1, max=255, message="255 max characters")
     private String name;
 
     public int getId() {
+
         return id;
     }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     @Override
     public String toString() {
+
         return name;
     }
 
